@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:friendo_app/pages/users_page.dart';
+import 'package:friendo_app/widgets/utils/hex_color.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -7,10 +8,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primaryColor: HexColor('55B3D0'),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: UsersPage(title: 'Flutter Demo Home Page'),
+      home: UsersPage(title: 'Users'),
     );
   }
 }
