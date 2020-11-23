@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friendo_app/widgets/drawer_menu/drawer_menu_tile.dart';
 import 'package:friendo_app/widgets/hamburger_menu_icon.dart';
 
 GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
@@ -9,62 +10,48 @@ class UsersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(44),
-        child: AppBar(
-          leading: Container(),
-          elevation: 0,
-          flexibleSpace: SafeArea(
-            child: Row(
-              children: [
-                const Center(
-                  child: Text(
-                    'Users',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+      appBar: AppBar(
+        title: Text(
+          title,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+        ),
+        leading: GestureDetector(
+          onTap: () {
+            _drawerKey.currentState.openDrawer();
+          },
+          child: HamburgerMenuIcon(color: Colors.white),
         ),
       ),
-      // appBar: AppBar(
-      //     title: Text(
-      //       title,
-      //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-      //     ),
-      //     leading: GestureDetector(
-      //         onTap: () => () {
-      //               print(1);
-      //               _drawerKey.currentState.openDrawer();
-      //             },
-      //         child: HamburgerMenuIcon(color: Colors.white))),
-      body: Center(
+      drawer: Drawer(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => () {
-                      print(1);
-                      _drawerKey.currentState.openDrawer();
-                    },
-                child: Container(
-                  height: 40,
-                  width: 40,
-                  color: Colors.red,
-                )),
-            Text(
-              'Users page',
+          children: [
+            DrawerMenuTile(
+              title: "プレミアムにアップグレード",
+              iconName: "星",
+            ),
+            DrawerMenuTile(
+              title: "アカウント",
+              iconName: "人",
+            ),
+            DrawerMenuTile(
+              title: "一般設定",
+              iconName: "歯車",
+            ),
+            DrawerMenuTile(
+              title: "サポート",
+              iconName: "はてな",
+            ),
+            DrawerMenuTile(
+              title: "アプリについて",
+              iconName: "びっくり",
+            ),
+            DrawerMenuTile(
+              title: "サインアウト",
+              iconName: "出口",
             ),
           ],
         ),
       ),
-      drawer: Drawer(),
       key: _drawerKey, // assign key to Scaffold
     );
   }
