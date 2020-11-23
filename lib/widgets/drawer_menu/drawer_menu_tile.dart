@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:friendo_app/widgets/utils/hex_color.dart';
+import 'package:friendo_app/widgets/utils/icon_widget.dart';
 
 class DrawerMenuTile extends StatelessWidget {
   DrawerMenuTile({Key key, this.title, this.iconName}) : super(key: key);
@@ -14,7 +15,8 @@ class DrawerMenuTile extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            child: Text(iconName),
+            child: IconWidget(name: iconName),
+            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
           ),
           Container(
             child: Text(title),

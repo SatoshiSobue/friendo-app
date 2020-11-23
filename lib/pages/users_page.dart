@@ -27,28 +27,28 @@ class UsersPage extends StatelessWidget {
           children: [
             DrawerMenuTile(
               title: "プレミアムにアップグレード",
-              iconName: "星",
+              iconName: "star",
             ),
             DrawerMenuTile(
               title: "アカウント",
-              iconName: "人",
+              iconName: "account",
             ),
             DrawerMenuTile(
               title: "一般設定",
-              iconName: "歯車",
+              iconName: "settings",
             ),
             DrawerMenuTile(
               title: "サポート",
-              iconName: "はてな",
+              iconName: "question",
             ),
             DrawerMenuTile(
               title: "アプリについて",
-              iconName: "びっくり",
+              iconName: "info",
             ),
-            DrawerMenuTile(
-              title: "サインアウト",
-              iconName: "出口",
-            ),
+            // DrawerMenuTile(
+            //   title: "サインアウト",
+            //   iconName: "出口",
+            // ),
           ],
         ),
       ),
