@@ -11,6 +11,6 @@ class IconWidget extends StatelessWidget {
     return Container(
         height: height,
         width: width,
-        child: Image.asset('assets/pngs/icon_$name.png'));
+        child: Image.asset('assets/pngs/$name.png'));
   }
 }
