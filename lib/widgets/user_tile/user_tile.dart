@@ -26,20 +26,45 @@ class UserTile extends StatelessWidget {
           ),
           Row(
             children: [
-              IconWidget(
-                name: "star",
-                width: 32,
-                height: 32,
+              Container(
+                child: IconWidget(
+                  name: "star",
+                  width: 32,
+                  height: 32,
+                ),
+                margin: EdgeInsets.fromLTRB(0, 0, 14, 0),
               ),
-              IconWidget(
-                name: "memo",
-                width: 32,
-                height: 32,
+              Column(
+                children: [
+                  SizedBox(height: 16),
+                  Container(
+                    child: IconWidget(
+                      name: "memo",
+                      width: 32,
+                      height: 32,
+                    ),
+                    margin: EdgeInsets.fromLTRB(0, 0, 14, 0),
+                  ),
+                  Container(
+                    child: Text('12'),
+                    margin: EdgeInsets.fromLTRB(0, 0, 14, 0),
+                  ),
+                ],
               ),
-              IconWidget(
-                name: "check_box_gray",
-                width: 32,
-                height: 32,
+              Column(
+                children: [
+                  SizedBox(height: 15),
+                  Container(
+                    child: IconWidget(
+                      name: "check_box_gray",
+                      width: 32,
+                      height: 32,
+                    ),
+                  ),
+                  Container(
+                    child: Text('32/35'),
+                  ),
+                ],
               ),
             ],
           ),
