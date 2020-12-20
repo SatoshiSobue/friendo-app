@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:friendo_app/models/entity/todo_state.dart';
 import 'package:friendo_app/widgets/utils/hex_color.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class TodoTile extends StatefulWidget {
+class TodoTile extends HookWidget {
   final String content;
   final DateTime date;
   TodoTile({this.content, this.date});
-  @override
-  TodoState createState() => TodoState();
-}
-
-class TodoState extends State<TodoTile> {
-  bool _isDone = false;
-
-  void toggleIsDone() {
-    _isDone = !_isDone;
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
+    final isDone = useProvider(todoStateProvider(0).state).isDone;
+    Function toggleIsDone = useProvider(todoStateProvider(0)).toggleTodoState;
     return InkWell(
       onTap: () => toggleIsDone(),
       child: Container(
@@ -33,7 +27,7 @@ class TodoState extends State<TodoTile> {
                   width: 24,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: _isDone
+                      image: isDone
                           ? AssetImage('assets/pngs/check_white.png')
                           : AssetImage('assets/pngs/account.png'),
                       fit: BoxFit.fill,
@@ -48,7 +42,7 @@ class TodoState extends State<TodoTile> {
                   height: 46,
                   child: Center(
                     child: Text(
-                      widget.content,
+                      content,
                       style:
                           TextStyle(color: HexColor('#4A4A4A'), fontSize: 20),
                     ),
@@ -59,7 +53,7 @@ class TodoState extends State<TodoTile> {
             Container(
               height: 20,
               child: Text(
-                '${widget.date.year}年${widget.date.month}月${widget.date.day}日',
+                '${date.year}年${date.month}月${date.day}日',
                 style: TextStyle(color: HexColor('#000000'), fontSize: 14),
               ),
               margin: EdgeInsets.fromLTRB(0, 22, 11, 18),
