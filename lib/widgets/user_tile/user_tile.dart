@@ -2,9 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:friendo_app/widgets/utils/hex_color.dart';
 import 'package:friendo_app/widgets/utils/icon_widget.dart';
 
-class UserTile extends StatelessWidget {
-  UserTile({Key key, this.userName}) : super(key: key);
+class UserTile extends StatefulWidget {
   final String userName;
+  UserTile({this.userName});
+  @override
+  UserState createState() => UserState();
+}
+
+class UserState extends State<UserTile> {
+  bool _isFavorite = false;
+
+  void toggleIsDone() {
+    _isFavorite = !_isFavorite;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,20 +31,23 @@ class UserTile extends StatelessWidget {
           Container(
             width: 128,
             child: Text(
-              userName,
+              widget.userName,
               style: TextStyle(color: HexColor('#4A4A4A'), fontSize: 20),
             ),
             margin: EdgeInsets.fromLTRB(0, 0, 30, 0),
           ),
           Row(
             children: [
-              Container(
-                child: IconWidget(
-                  name: "star",
-                  width: 32,
-                  height: 32,
+              InkWell(
+                onTap: () => toggleIsDone(),
+                child: Container(
+                  child: IconWidget(
+                    name: _isFavorite ? "star_fill" : "star",
+                    width: 32,
+                    height: 32,
+                  ),
+                  margin: EdgeInsets.fromLTRB(0, 0, 14, 0),
                 ),
-                margin: EdgeInsets.fromLTRB(0, 0, 14, 0),
               ),
               Column(
                 children: [
