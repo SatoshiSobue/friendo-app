@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:friendo_app/widgets/drawer_menu/drawer_menu_tile.dart';
 import 'package:friendo_app/widgets/drawer_menu/drawer_menun_user_tile.dart';
 import 'package:friendo_app/widgets/hamburger_menu_icon.dart';
+import 'package:friendo_app/widgets/todo_tile/todo_tile.dart';
 import 'package:friendo_app/widgets/user_tile/user_tile.dart';
 
 GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
@@ -60,6 +61,7 @@ class UsersPage extends StatelessWidget {
         body: Column(
           children: [
             UserTile(userName: "田中　圭"),
+            TodoTile(content: "早く寝る", date: DateTime.now()),
           ],
         ),
       ),
