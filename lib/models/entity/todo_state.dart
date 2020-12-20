@@ -10,7 +10,7 @@ final todoStateProvider =
 
 @freezed
 abstract class TodoState implements _$TodoState {
-  factory TodoState({bool isDone}) = _TodoState;
+  factory TodoState({@Default(false) bool isDone}) = _TodoState;
 
   TodoState._();
 }

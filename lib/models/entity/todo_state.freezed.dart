@@ -14,7 +14,7 @@ class _$TodoStateTearOff {
   const _$TodoStateTearOff();
 
 // ignore: unused_element
-  _TodoState call({bool isDone}) {
+  _TodoState call({bool isDone = false}) {
     return _TodoState(
       isDone: isDone,
     );
@@ -87,8 +87,11 @@ class __$TodoStateCopyWithImpl<$Res> extends _$TodoStateCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_TodoState extends _TodoState {
-  _$_TodoState({this.isDone}) : super._();
+  _$_TodoState({this.isDone = false})
+      : assert(isDone != null),
+        super._();
 
+  @JsonKey(defaultValue: false)
   @override
   final bool isDone;
 
