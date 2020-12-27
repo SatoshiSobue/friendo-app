@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:friendo_app/widgets/dialog/user_dialog_tile.dart';
 import 'package:friendo_app/widgets/utils/hex_color.dart';
 import 'package:friendo_app/widgets/utils/icon_widget.dart';
 
@@ -31,51 +32,16 @@ class UserDialog extends StatelessWidget {
                       child: Container(color: Colors.blue),
                     ),
                     SizedBox(height: 17),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Name",
-                            style: TextStyle(fontSize: 12),
-                            textAlign: TextAlign.left),
-                        SizedBox(height: 12.88),
-                        Text(name,
-                            style: TextStyle(fontSize: 16),
-                            textAlign: TextAlign.left),
-                        Divider(
-                          height: 9.37,
-                          thickness: 2,
-                          color: HexColor("#4A4A4A"),
-                        ),
-                      ],
-                    ),
+                    UserDialogTile(title: "Name", content: name),
                     SizedBox(height: 16),
-                    Text("Name",
-                        style: TextStyle(fontSize: 12),
-                        textAlign: TextAlign.left),
-                    SizedBox(height: 12.88),
-                    Text(pronounce,
-                        style: TextStyle(fontSize: 16),
-                        textAlign: TextAlign.left),
-                    Divider(
-                      height: 9.37,
-                      thickness: 2,
-                      color: HexColor("#4A4A4A"),
-                    ),
+                    UserDialogTile(title: "Name", content: pronounce),
                     SizedBox(height: 16),
-                    Text("Name",
-                        style: TextStyle(fontSize: 12),
-                        textAlign: TextAlign.left),
-                    SizedBox(height: 12.88),
-                    Text(
-                        '${birthday.year} / ${birthday.month.toString().padLeft(2, "0")} / ${birthday.day}',
-                        style: TextStyle(fontSize: 16),
-                        textAlign: TextAlign.left),
-                    Divider(
-                      height: 9.37,
-                      thickness: 2,
-                      color: HexColor("#4A4A4A"),
+                    UserDialogTile(
+                      title: "Birth Day",
+                      content:
+                          '${birthday.year} / ${birthday.month.toString().padLeft(2, "0")} / ${birthday.day}',
                     ),
-                    SizedBox(height: 23.45),
+                    SizedBox(height: 23),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
