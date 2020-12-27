@@ -18,30 +18,35 @@ class UserDialog extends StatelessWidget {
           barrierDismissible: false,
           builder: (BuildContext context) {
             return AlertDialog(
+              contentPadding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
               content: Container(
-                height: 390,
+                height: 360,
                 width: 320,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       height: 56,
                       width: 56,
                       child: Container(color: Colors.blue),
-                      margin: EdgeInsets.fromLTRB(97, 0, 0, 0),
                     ),
                     SizedBox(height: 17),
-                    Text("Name",
-                        style: TextStyle(fontSize: 12),
-                        textAlign: TextAlign.left),
-                    SizedBox(height: 12.88),
-                    Text(name,
-                        style: TextStyle(fontSize: 16),
-                        textAlign: TextAlign.left),
-                    Divider(
-                      height: 9.37,
-                      thickness: 2,
-                      color: HexColor("#4A4A4A"),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Name",
+                            style: TextStyle(fontSize: 12),
+                            textAlign: TextAlign.left),
+                        SizedBox(height: 12.88),
+                        Text(name,
+                            style: TextStyle(fontSize: 16),
+                            textAlign: TextAlign.left),
+                        Divider(
+                          height: 9.37,
+                          thickness: 2,
+                          color: HexColor("#4A4A4A"),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 16),
                     Text("Name",
