@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:friendo_app/widgets/dialog/user_dialog.dart';
 import 'package:friendo_app/widgets/drawer_menu/drawer_menu_tile.dart';
 import 'package:friendo_app/widgets/drawer_menu/drawer_menun_user_tile.dart';
 import 'package:friendo_app/widgets/hamburger_menu_icon.dart';
@@ -62,6 +63,11 @@ class UsersPage extends StatelessWidget {
           children: [
             UserTile(userName: "田中　圭"),
             TodoTile(content: "早く寝る", date: DateTime.now()),
+            UserDialog(
+              name: "田中　圭",
+              pronounce: "たなか　けい",
+              birthday: DateTime(1985, DateTime.july, 22),
+            )
           ],
         ),
       ),
