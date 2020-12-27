@@ -4,10 +4,25 @@ import 'package:friendo_app/widgets/dialog/user_dialog_tile.dart';
 import 'package:friendo_app/widgets/utils/hex_color.dart';
 import 'package:friendo_app/widgets/utils/icon_widget.dart';
 
-class UserDialog extends StatelessWidget {
+class UserDialog extends StatefulWidget {
   final String name, pronounce;
   final DateTime birthday;
   UserDialog({this.name, this.pronounce, this.birthday});
+  @override
+  _UserDialogState createState() => _UserDialogState(name, pronounce, birthday);
+}
+
+class _UserDialogState extends State<UserDialog> {
+  TextEditingController _textEditingController;
+  String name, pronounce;
+  DateTime birthday;
+  _UserDialogState(this.name, this.pronounce, this.birthday);
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController = new TextEditingController(text: name); // <- こんな感じ
+  }
+
   @override
   Widget build(BuildContext context) {
     return FlatButton(
@@ -32,14 +47,53 @@ class UserDialog extends StatelessWidget {
                       child: Container(color: Colors.blue),
                     ),
                     SizedBox(height: 17),
-                    UserDialogTile(title: "Name", content: name),
+                    GestureDetector(
+                      onTap: () => showDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: Text('title'),
+                          content: TextFormField(
+                            controller: _textEditingController,
+                          ),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text("OK"),
+                              onPressed: () {
+                                Navigator.pop(
+                                    context, _textEditingController.text);
+                              },
+                            )
+                          ],
+                        ),
+                      ).then((val) => setState(() => name = val)),
+                      child: UserDialogTile(title: "Name", content: name),
+                    ),
                     SizedBox(height: 16),
-                    UserDialogTile(title: "Name", content: pronounce),
+                    GestureDetector(
+                      onTap: () => showDialog(
+                          context: context,
+                          barrierDismissible: true,
+                          builder: (BuildContext context) => SimpleDialog(
+                                title: Text('title'),
+                                children: [],
+                              )),
+                      child: UserDialogTile(
+                          title: "Name", content: widget.pronounce),
+                    ),
                     SizedBox(height: 16),
-                    UserDialogTile(
-                      title: "Birth Day",
-                      content:
-                          '${birthday.year} / ${birthday.month.toString().padLeft(2, "0")} / ${birthday.day}',
+                    GestureDetector(
+                      onTap: () => showDialog(
+                          context: context,
+                          barrierDismissible: true,
+                          builder: (BuildContext context) => SimpleDialog(
+                                title: Text('title'),
+                              )),
+                      child: UserDialogTile(
+                        title: "Birth Day",
+                        content:
+                            '${widget.birthday.year} / ${widget.birthday.month.toString().padLeft(2, "0")} / ${widget.birthday.day}',
+                      ),
                     ),
                     SizedBox(height: 23),
                     Row(
