@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:friendo_app/models/entity/todo_state.dart';
 import 'package:friendo_app/widgets/utils/hex_color.dart';
 import 'package:friendo_app/widgets/utils/icon_widget.dart';
+import 'package:hooks_riverpod/all.dart';
 
-class UserTile extends StatefulWidget {
+class UserTile extends HookWidget {
   final String userName;
   UserTile({this.userName});
-  @override
-  UserState createState() => UserState();
-}
-
-class UserState extends State<UserTile> {
-  bool _isFavorite = false;
-
-  void toggleIsDone() {
-    _isFavorite = !_isFavorite;
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
+    final _isFavorite = useProvider(todoStateProvider(0).state).isDone;
     return Container(
       child: Row(
         children: [
@@ -31,7 +24,7 @@ class UserState extends State<UserTile> {
           Container(
             width: 128,
             child: Text(
-              widget.userName,
+              userName,
               style: TextStyle(color: HexColor('#4A4A4A'), fontSize: 20),
             ),
             margin: EdgeInsets.fromLTRB(0, 0, 30, 0),
@@ -39,7 +32,6 @@ class UserState extends State<UserTile> {
           Row(
             children: [
               InkWell(
-                onTap: () => toggleIsDone(),
                 child: Container(
                   child: IconWidget(
                     name: _isFavorite ? "star_fill" : "star",
