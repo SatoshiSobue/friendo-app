@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:friendo_app/models/entity/user_dialog_state.dart';
 import 'package:friendo_app/widgets/dialog/user_dialog_tile.dart';
 import 'package:friendo_app/widgets/utils/icon_widget.dart';
+import 'package:hooks_riverpod/all.dart';
 
 class UserDialog extends HookWidget {
   UserDialog({this.name, this.pronounce, this.birthday});
   final String name, pronounce;
   final DateTime birthday;
-  TextEditingController _textEditingController;
 
   @override
   Widget build(BuildContext context) {
+    final updateName = useProvider(userDialogStateProvider(1)).updateName;
+    final name = useProvider(userDialogStateProvider(1).state).name;
+    final _textEditingController = TextEditingController(text: name);
     return FlatButton(
       child: Text('show dialog'),
       onPressed: () async {
@@ -53,8 +57,8 @@ class UserDialog extends HookWidget {
                             )
                           ],
                         ),
-                      ).then((val) {}),
-                      child: UserDialogTile(title: "Name", content: name),
+                      ).then((val) => {updateName(val)}),
+                      child: UserDialogTile(title: "Name"),
                     ),
                     SizedBox(height: 16),
                     GestureDetector(
@@ -65,7 +69,7 @@ class UserDialog extends HookWidget {
                                 title: Text('title'),
                                 children: [],
                               )),
-                      child: UserDialogTile(title: "Name", content: pronounce),
+                      child: UserDialogTile(title: "Pronounce"),
                     ),
                     SizedBox(height: 16),
                     GestureDetector(
@@ -77,8 +81,6 @@ class UserDialog extends HookWidget {
                               )),
                       child: UserDialogTile(
                         title: "Birth Day",
-                        content:
-                            '${birthday.year} / ${birthday.month.toString().padLeft(2, "0")} / ${birthday.day}',
                       ),
                     ),
                     SizedBox(height: 23),
