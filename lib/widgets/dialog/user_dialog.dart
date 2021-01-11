@@ -3,18 +3,21 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:friendo_app/models/entity/user_dialog_state.dart';
 import 'package:friendo_app/widgets/dialog/user_dialog_tile.dart';
+import 'package:friendo_app/widgets/calendar/select_date.dart';
 import 'package:friendo_app/widgets/utils/icon_widget.dart';
 import 'package:hooks_riverpod/all.dart';
 
 class UserDialog extends HookWidget {
   UserDialog({this.name, this.pronounce, this.birthday});
   final String name, pronounce;
-  final DateTime birthday;
+  final String birthday;
 
   @override
   Widget build(BuildContext context) {
     final updateName = useProvider(userDialogStateProvider(1)).updateName;
     final name = useProvider(userDialogStateProvider(1).state).name;
+    final updateBirthDay =
+        useProvider(userDialogStateProvider(1)).updateBirthDay;
     final _textEditingController = TextEditingController(text: name);
     return FlatButton(
       child: Text('show dialog'),
@@ -73,12 +76,8 @@ class UserDialog extends HookWidget {
                     ),
                     SizedBox(height: 16),
                     GestureDetector(
-                      onTap: () => showDialog(
-                          context: context,
-                          barrierDismissible: true,
-                          builder: (BuildContext context) => SimpleDialog(
-                                title: Text('title'),
-                              )),
+                      onTap: () => selectDate(context)
+                          .then((val) => {updateBirthDay(val)}),
                       child: UserDialogTile(
                         title: "Birth Day",
                       ),
