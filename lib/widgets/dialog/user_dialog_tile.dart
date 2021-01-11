@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:friendo_app/widgets/utils/hex_color.dart';
 
-class UserDialogTile extends StatefulWidget {
+class UserDialogTile extends HookWidget {
   final String title, content;
-  UserDialogTile({this.title, this.content, Key key}) : super(key: key);
-  @override
-  UserDialogTileState createState() => UserDialogTileState(title, content);
-}
-
-class UserDialogTileState extends State<UserDialogTile> {
-  final String title;
-  String content;
-  UserDialogTileState(this.title, this.content);
+  UserDialogTile({this.title, this.content});
   // Function updateContent=(val)=>{setState(() => content = val)}
   @override
   Widget build(BuildContext context) {

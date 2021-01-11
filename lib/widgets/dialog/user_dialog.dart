@@ -1,29 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:friendo_app/widgets/dialog/user_dialog_tile.dart';
-import 'package:friendo_app/widgets/utils/hex_color.dart';
 import 'package:friendo_app/widgets/utils/icon_widget.dart';
 
-GlobalKey _key = GlobalKey<UserDialogTileState>();
-
-class UserDialog extends StatefulWidget {
+class UserDialog extends HookWidget {
+  UserDialog({this.name, this.pronounce, this.birthday});
   final String name, pronounce;
   final DateTime birthday;
-  UserDialog({this.name, this.pronounce, this.birthday});
-  @override
-  _UserDialogState createState() => _UserDialogState(name, pronounce, birthday);
-}
-
-class _UserDialogState extends State<UserDialog> {
   TextEditingController _textEditingController;
-  String name, pronounce;
-  DateTime birthday;
-  _UserDialogState(this.name, this.pronounce, this.birthday);
-  @override
-  void initState() {
-    super.initState();
-    _textEditingController = new TextEditingController(text: name); // <- こんな感じ
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,14 +53,8 @@ class _UserDialogState extends State<UserDialog> {
                             )
                           ],
                         ),
-                      ).then((val) {
-                        setState(() {
-                          name = val;
-                        });
-                        _key.currentState.setState(() => {print(_key)});
-                      }),
-                      child: UserDialogTile(
-                          title: "Name", content: name, key: _key),
+                      ).then((val) {}),
+                      child: UserDialogTile(title: "Name", content: name),
                     ),
                     SizedBox(height: 16),
                     GestureDetector(
@@ -86,8 +65,7 @@ class _UserDialogState extends State<UserDialog> {
                                 title: Text('title'),
                                 children: [],
                               )),
-                      child: UserDialogTile(
-                          title: "Name", content: widget.pronounce),
+                      child: UserDialogTile(title: "Name", content: pronounce),
                     ),
                     SizedBox(height: 16),
                     GestureDetector(
@@ -100,7 +78,7 @@ class _UserDialogState extends State<UserDialog> {
                       child: UserDialogTile(
                         title: "Birth Day",
                         content:
-                            '${widget.birthday.year} / ${widget.birthday.month.toString().padLeft(2, "0")} / ${widget.birthday.day}',
+                            '${birthday.year} / ${birthday.month.toString().padLeft(2, "0")} / ${birthday.day}',
                       ),
                     ),
                     SizedBox(height: 23),
