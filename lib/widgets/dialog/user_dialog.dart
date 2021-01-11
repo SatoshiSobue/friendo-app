@@ -4,6 +4,8 @@ import 'package:friendo_app/widgets/dialog/user_dialog_tile.dart';
 import 'package:friendo_app/widgets/utils/hex_color.dart';
 import 'package:friendo_app/widgets/utils/icon_widget.dart';
 
+GlobalKey _key = GlobalKey<UserDialogTileState>();
+
 class UserDialog extends StatefulWidget {
   final String name, pronounce;
   final DateTime birthday;
@@ -66,8 +68,14 @@ class _UserDialogState extends State<UserDialog> {
                             )
                           ],
                         ),
-                      ).then((val) => setState(() => name = val)),
-                      child: UserDialogTile(title: "Name", content: name),
+                      ).then((val) {
+                        setState(() {
+                          name = val;
+                        });
+                        _key.currentState.setState(() => {print(_key)});
+                      }),
+                      child: UserDialogTile(
+                          title: "Name", content: name, key: _key),
                     ),
                     SizedBox(height: 16),
                     GestureDetector(

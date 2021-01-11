@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:friendo_app/widgets/utils/hex_color.dart';
 
-class UserDialogTile extends StatelessWidget {
-  UserDialogTile({this.title, this.content});
+class UserDialogTile extends StatefulWidget {
   final String title, content;
+  UserDialogTile({this.title, this.content, Key key}) : super(key: key);
+  @override
+  UserDialogTileState createState() => UserDialogTileState(title, content);
+}
+
+class UserDialogTileState extends State<UserDialogTile> {
+  final String title;
+  String content;
+  UserDialogTileState(this.title, this.content);
+  // Function updateContent=(val)=>{setState(() => content = val)}
   @override
   Widget build(BuildContext context) {
     return Column(
