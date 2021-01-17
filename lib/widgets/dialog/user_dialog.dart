@@ -5,6 +5,7 @@ import 'package:friendo_app/models/entity/user_dialog_state.dart';
 import 'package:friendo_app/widgets/dialog/user_dialog_tile.dart';
 import 'package:friendo_app/widgets/calendar/select_date.dart';
 import 'package:friendo_app/widgets/utils/icon_widget.dart';
+import 'package:friendo_app/pages/memo_list_page.dart';
 import 'package:hooks_riverpod/all.dart';
 
 class UserDialog extends HookWidget {
@@ -118,11 +119,18 @@ class UserDialog extends HookWidget {
                         ),
                         Column(
                           children: [
-                            Container(
-                              child: IconWidget(
-                                name: "memo",
-                                width: 32,
-                                height: 32,
+                            GestureDetector(
+                              onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (c) => MemoListPage(),
+                                ),
+                              ),
+                              child: Container(
+                                child: IconWidget(
+                                  name: "memo",
+                                  width: 32,
+                                  height: 32,
+                                ),
                               ),
                             ),
                             Container(
