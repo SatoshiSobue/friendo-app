@@ -76,8 +76,9 @@ class UserDialog extends HookWidget {
                     ),
                     SizedBox(height: 16),
                     GestureDetector(
-                      onTap: () => selectDate(context)
-                          .then((val) => {updateBirthDay(val)}),
+                      onTap: () => selectDate(context).then((val) => {
+                            if (val != null) {updateBirthDay(val)}
+                          }),
                       child: UserDialogTile(
                         title: "Birth Day",
                       ),

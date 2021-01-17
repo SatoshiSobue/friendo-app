@@ -12,5 +12,7 @@ Future<String> selectDate(BuildContext context) async {
   );
   if (picked != null) {
     return (DateFormat('yyyy/MM/dd').format(picked));
+  } else {
+    return null;
   }
 }
