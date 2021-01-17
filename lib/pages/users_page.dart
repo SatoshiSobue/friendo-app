@@ -17,6 +17,7 @@ class UsersPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final name = useProvider(userDialogStateProvider(1).state).name;
+    final birthDay = useProvider(userDialogStateProvider(1).state).birthDay;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -70,7 +71,7 @@ class UsersPage extends HookWidget {
             UserDialog(
               name: name,
               pronounce: "たなか　けい",
-              birthday: DateTime(1985, DateTime.july, 22),
+              birthday: birthDay,
             )
           ],
         ),
