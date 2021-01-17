@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:friendo_app/models/entity/user_dialog_state.dart';
 import 'package:friendo_app/widgets/dialog/user_dialog_tile.dart';
-import 'package:friendo_app/widgets/utils/hex_color.dart';
 import 'package:friendo_app/widgets/utils/icon_widget.dart';
+import 'package:hooks_riverpod/all.dart';
 
-class UserDialog extends StatelessWidget {
+class UserDialog extends HookWidget {
+  UserDialog({this.name, this.pronounce, this.birthday});
   final String name, pronounce;
   final DateTime birthday;
-  UserDialog({this.name, this.pronounce, this.birthday});
+
   @override
   Widget build(BuildContext context) {
+    final updateName = useProvider(userDialogStateProvider(1)).updateName;
+    final updatePronounce =
+        useProvider(userDialogStateProvider(1)).updatePronounce;
+    final name = useProvider(userDialogStateProvider(1).state).name;
+    final pronounce = useProvider(userDialogStateProvider(1).state).pronounce;
+    final _nameController = TextEditingController(text: name);
+    final _pronounceController = TextEditingController(text: pronounce);
     return FlatButton(
       child: Text('show dialog'),
       onPressed: () async {
@@ -32,14 +42,61 @@ class UserDialog extends StatelessWidget {
                       child: Container(color: Colors.blue),
                     ),
                     SizedBox(height: 17),
-                    UserDialogTile(title: "Name", content: name),
+                    GestureDetector(
+                      onTap: () => showDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: Text('Name'),
+                          content: TextFormField(
+                            controller: _nameController,
+                          ),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text("OK"),
+                              onPressed: () {
+                                Navigator.pop(context, _nameController.text);
+                              },
+                            )
+                          ],
+                        ),
+                      ).then((val) => {updateName(val)}),
+                      child: UserDialogTile(title: "Name"),
+                    ),
                     SizedBox(height: 16),
-                    UserDialogTile(title: "Name", content: pronounce),
+                    GestureDetector(
+                      onTap: () => showDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: Text('Pronounce'),
+                          content: TextFormField(
+                            controller: _pronounceController,
+                          ),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text("OK"),
+                              onPressed: () {
+                                Navigator.pop(
+                                    context, _pronounceController.text);
+                              },
+                            )
+                          ],
+                        ),
+                      ).then((val) => {updatePronounce(val)}),
+                      child: UserDialogTile(title: "Pronounce"),
+                    ),
                     SizedBox(height: 16),
-                    UserDialogTile(
-                      title: "Birth Day",
-                      content:
-                          '${birthday.year} / ${birthday.month.toString().padLeft(2, "0")} / ${birthday.day}',
+                    GestureDetector(
+                      onTap: () => showDialog(
+                          context: context,
+                          barrierDismissible: true,
+                          builder: (BuildContext context) => SimpleDialog(
+                                title: Text('title'),
+                              )),
+                      child: UserDialogTile(
+                        title: "Birth Day",
+                      ),
                     ),
                     SizedBox(height: 23),
                     Row(
