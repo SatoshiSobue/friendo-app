@@ -15,10 +15,14 @@ class UserDialog extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final updateName = useProvider(userDialogStateProvider(1)).updateName;
+    final updatePronounce =
+        useProvider(userDialogStateProvider(1)).updatePronounce;
     final name = useProvider(userDialogStateProvider(1).state).name;
     final updateBirthDay =
         useProvider(userDialogStateProvider(1)).updateBirthDay;
-    final _textEditingController = TextEditingController(text: name);
+    final pronounce = useProvider(userDialogStateProvider(1).state).pronounce;
+    final _nameController = TextEditingController(text: name);
+    final _pronounceController = TextEditingController(text: pronounce);
     return FlatButton(
       child: Text('show dialog'),
       onPressed: () async {
@@ -46,16 +50,15 @@ class UserDialog extends HookWidget {
                         context: context,
                         barrierDismissible: true,
                         builder: (BuildContext context) => AlertDialog(
-                          title: Text('title'),
+                          title: Text('Name'),
                           content: TextFormField(
-                            controller: _textEditingController,
+                            controller: _nameController,
                           ),
                           actions: <Widget>[
                             FlatButton(
                               child: Text("OK"),
                               onPressed: () {
-                                Navigator.pop(
-                                    context, _textEditingController.text);
+                                Navigator.pop(context, _nameController.text);
                               },
                             )
                           ],
@@ -66,12 +69,24 @@ class UserDialog extends HookWidget {
                     SizedBox(height: 16),
                     GestureDetector(
                       onTap: () => showDialog(
-                          context: context,
-                          barrierDismissible: true,
-                          builder: (BuildContext context) => SimpleDialog(
-                                title: Text('title'),
-                                children: [],
-                              )),
+                        context: context,
+                        barrierDismissible: true,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: Text('Pronounce'),
+                          content: TextFormField(
+                            controller: _pronounceController,
+                          ),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text("OK"),
+                              onPressed: () {
+                                Navigator.pop(
+                                    context, _pronounceController.text);
+                              },
+                            )
+                          ],
+                        ),
+                      ).then((val) => {updatePronounce(val)}),
                       child: UserDialogTile(title: "Pronounce"),
                     ),
                     SizedBox(height: 16),
